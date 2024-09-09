@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	numRows      = 100
-	numWorkers   = 10
+	numRows      = 2000000
+	numWorkers   = 20
 	csvFileName  = "output.csv"
 	charset      = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	fileNameBase = "file_"

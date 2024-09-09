@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
@@ -21,33 +20,20 @@ repositories {
 }
 
 dependencies {
-//    Ktor
-    implementation(libs.ktor.server.netty)
-    implementation(libs.ktor.server.core)
-    implementation(libs.ktor.serialization.kotlinx.json)
-    implementation(libs.ktor.server.content.negotiation)
-    implementation(libs.ktor.server.config.yaml)
-//    Database
-    implementation(libs.postgresql)
-    implementation(libs.h2)
-    implementation(libs.exposed.core)
-    implementation(libs.exposed.jdbc)
-    implementation(libs.exposed.dao)
-    implementation(libs.exposed.date.time)
-//    OTEL
-    implementation(libs.otel.api)
-    implementation(libs.otel.extension.kotlin)
-    implementation(libs.otel.ktor)
-    implementation(libs.otel.extension.annotations)
-//    DI
-    implementation(libs.koin.ktor)
-    implementation(libs.koin.logger)
+//    Coroutines
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.datetime)
 //    Log
+    implementation(libs.logback.core)
     implementation(libs.logback.classic)
+    implementation(libs.logback.gcp)
+//    Google Cloud
+    implementation(libs.google.cloud.bigquery)
+    implementation(libs.google.cloud.storage)
+//    Misc
+    implementation(libs.apache.csv)
 //    Testing
-    implementation(libs.faker)
-    testImplementation(libs.ktor.server.tests)
-    testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
     testImplementation(libs.testcontainers.postgres)
 }
