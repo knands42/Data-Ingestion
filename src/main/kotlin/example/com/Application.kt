@@ -25,6 +25,7 @@ fun main(args: Array<String>) = runBlocking {
         .also { logger.info("${it.size / 1024 / 1024} MiB") }
         .bufferedReader()
 
+    val stats = StatisticCollector(logger)
     val writer = tableId.protoWriter()
     val now = Clock.System.now().toProtoField()
 
@@ -33,17 +34,23 @@ fun main(args: Array<String>) = runBlocking {
         .asFlow()
         .chunked(2000)
         .parallelProcessing {
+            stats.addIngestedRows(it.size)
+
             val beforeProcess = System.nanoTime()
             val rowsBuilder = ProtoRows.newBuilder()
             for (record in it) {
-                rowsBuilder.addAllSerializedRows(record.toProtoMessage(writer, fileName, now))
+                rowsBuilder.addSerializedRows(record.toProtoMessage(writer, fileName, now))
             }
             val rows = rowsBuilder.build()
             val afterProcess = System.nanoTime()
             writer.appendRows(rows)
             val afterRequest = System.nanoTime()
+
+            stats.addProcessDuration(afterProcess - beforeProcess)
+            stats.addRequestDuration(afterRequest - afterProcess)
         }
 
+    stats.logStats()
     writer.close()
     return@runBlocking
 }
