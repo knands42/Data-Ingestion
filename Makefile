@@ -7,7 +7,7 @@ gen-csv:
 gcloud-login:
 	gcloud auth login --update-adc
 
-gcloud-setup-storage:
+gcloud-upload:
 	@echo "Enter the destination bucket:"
 	@read bucket; \
 	if [ -z "$$bucket" ]; then \
@@ -15,3 +15,6 @@ gcloud-setup-storage:
 	fi; \
 	cd ./script
 	gsutil cp output.csv gs://$$bucket
+
+run:
+	gradle run
