@@ -3,8 +3,8 @@
 ## About the project
 
 This project is about data ingestion. It is a simple project that reads data from a csv file and writes it to a
-database. It is written in Kotlin and it fetch a csv file from Google Cloud storage and process using Kotlin Flow to
-persist into BigQuery.
+database. It is written in Kotlin, it fetch a csv file from Google Cloud storage and process using Kotlin Flow to
+persist into BigQuery using proto api from GCP SDK.
 
 ## How to run
 

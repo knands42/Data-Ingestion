@@ -1,6 +1,6 @@
 gen-csv:
 	@echo "Generating CSV files..."
-	cd ./scripts
+	cd ./script
 	go run generate_random_csv.go
 	@echo "Done."
 
